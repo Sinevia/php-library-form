@@ -2,7 +2,7 @@ namespace Sinevia;
 
 class Form {
 
-    public static function formBuild($fields, $options = []) {
+    public static function build($fields, $options = []) {
         $submitText = isset($options['submit.text']) ? $options['submit.text'] : 'Submit';
         $formContainer = (new \Sinevia\Html\Div)
                 ->setClass('row');
@@ -119,6 +119,39 @@ class Form {
         $form = (new \Sinevia\Html\Form)->setMethod('POST');
         $form->addChild($formContainer);
         return $form;
+    }
+
+    public static function validate($fields) {
+        $validator = new \Valitron\Validator($_REQUEST);
+
+        $rules = [];
+        foreach ($fields as $field) {
+            $type = trim($field['type'] ?? null);
+            $name = trim($field['name'] ?? null);
+            $rule = $field['rule'] ?? null;
+
+            if ($name == "") {
+                continue;
+            }
+            if ($type == "") {
+                continue;
+            }
+            if ($rule == "") {
+                continue;
+            }
+            $rules[$name] = $rule;
+            $validator->rule($rule, $name);
+        }
+
+        if (count($rules) < 1) {
+            return true;
+        }
+
+        if ($validator->validate() == false) {
+            return $validator->errors();
+        }
+
+        return true;
     }
 
 }
