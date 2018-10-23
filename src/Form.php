@@ -1,3 +1,5 @@
+<?php
+
 namespace Sinevia;
 
 class Form {
