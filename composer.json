@@ -1,0 +1,24 @@
+{
+    "name": "sinevia/php-library-form",
+    "description": "PHP Library Form",
+    "type": "library",
+    "keywords": ["form", "library", "php", "sinevia"],    
+    "homepage": "http://github.com/sinevia/php-library-form",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Milan Lesichkov",
+            "email": "lesichkovm@gmail.com",
+            "homepage": "http://lesichkov.co.uk",
+            "role": "Lead Developer"
+        }
+    ],
+    "require": {
+        "sinevia/php-library-html": "v1.*"
+    },
+    "autoload": {
+        "files": [
+            "src/Form.php",
+        ]
+    }
+}
