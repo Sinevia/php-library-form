@@ -124,7 +124,7 @@ class Form {
     }
 
     public static function validate($fields) {
-        $validator = new \Valitron\Validator($_REQUEST);
+        //$validator = new \Valitron\Validator($_REQUEST);
 
         $rules = [];
         foreach ($fields as $field) {
@@ -142,18 +142,50 @@ class Form {
                 continue;
             }
             $rules[$name] = $rule;
-            $validator->rule($rule, $name);
+//            if (is_array($rule)) {
+//                foreach ($rule as $r) {
+//                    $validator->rule($r, $name);
+//                }
+//            } else {
+//                $validator->rule($rule, $name);
+//            }
         }
 
         if (count($rules) < 1) {
             return true;
         }
+        
+        $validator = (new \Rakit\Validation\Validator);
+        $validator = $validator->make($_REQUEST, $rules);
+        
+        $validator->validate();
 
-        if ($validator->validate() == false) {
-            return $validator->errors();
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            $errors = self::flattenArrayWithDashes($errors);
+            $errors = array_values($errors);
+            return $errors;
+            //return $validator->errors();
         }
 
+//        if ($validator->validate() == false) {
+//            return $validator->errors();
+//        }
+
         return true;
+    }
+    
+    protected static function flattenArrayWithDashes(array $array) {
+        $ritit = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($array));
+        $result = array();
+        foreach ($ritit as $leafValue) {
+            $keys = array();
+            foreach (range(0, $ritit->getDepth()) as $depth) {
+                $keys[] = $ritit->getSubIterator($depth)->key();
+            }
+            $result[join('_', $keys)] = $leafValue;
+        }
+        return $result;
     }
 
 }
