@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "sinevia/php-library-html": "v1.*"
+        "sinevia/php-library-html": "v1.*",
+        "vlucas/valitron":"v1.*"
     },
     "autoload": {
         "files": [
