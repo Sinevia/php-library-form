@@ -15,7 +15,7 @@
     ],
     "require": {
         "sinevia/php-library-html": "*",
-        "vlucas/valitron":"*"
+        "rakit/validation": "*"
     },
     "autoload": {
         "files": [
