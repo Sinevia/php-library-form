@@ -2,7 +2,7 @@
 
 A form helper
 
-## Example function returning form fields ##
+## Example
 
 ```php
 function formProfileFields($user) {
@@ -145,5 +145,13 @@ function formProfileFields($user) {
 
 function formProfile($user) {
     return \Sinevia\Form::build($this->formProfileFields($user))->toHtml();
+}
+
+$isValidOrErrorArray = \Sinevia\Form::validate($this->formProfileFields($user));
+
+if(is_array($isValidOrErrorArray)){
+    // Validation failed, show errors
+} else {
+    // Validation was successful
 }
 ```
