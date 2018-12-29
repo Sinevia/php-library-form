@@ -142,4 +142,8 @@ function formProfileFields($user) {
 
     return $fields;
 }
+
+function formProfile($user) {
+    return \Sinevia\Form::build($this->formProfileFields($user))->toHtml();
+}
 ```
