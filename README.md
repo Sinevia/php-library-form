@@ -138,6 +138,14 @@ function formProfileFields($user) {
             'width' => 6,
             'value' => $user->Postcode,
         ],
+        [
+            'type' => 'hidden',
+            'name' => 'UserId',
+            'label' => 'UserId',
+            'rule' => 'required',
+            'width' => 6,
+            'value' => $user->Id,
+        ],
     ];
 
     return $fields;
