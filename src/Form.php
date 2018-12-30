@@ -61,11 +61,14 @@ class Form {
                 }
             }
 
-            if ($type == 'text') {
+            if ($type == 'text' OR $type == 'hidden') {
                 $input = (new \Sinevia\Html\Input)
                         ->setClass('form-control')
                         ->setName($name)
                         ->setValue($value);
+                if ($type == "hidden") {
+                    $input->setType("hidden");
+                }
             }
 
             if ($type == 'textarea') {
@@ -95,7 +98,10 @@ class Form {
                 }
             }
 
-            $formGroup->addChild($label);
+            if ($type != "hidden") {
+                $formGroup->addChild($label);
+            }
+            
             $formGroup->addChild($input);
             if (is_null($hiddenInput) == false) {
                 $formGroup->addChild($hiddenInput);
@@ -154,10 +160,10 @@ class Form {
         if (count($rules) < 1) {
             return true;
         }
-        
+
         $validator = (new \Rakit\Validation\Validator);
         $validator = $validator->make($_REQUEST, $rules);
-        
+
         $validator->validate();
 
         if ($validator->fails()) {
@@ -174,7 +180,7 @@ class Form {
 
         return true;
     }
-    
+
     protected static function flattenArrayWithDashes(array $array) {
         $ritit = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($array));
         $result = array();
