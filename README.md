@@ -2,7 +2,45 @@
 
 A form helper
 
-## Example
+## Building Forms ##
+
+```php
+$form = \Sinevia\Form::build($fields)->toHtml();
+```
+
+## Validating Forms ##
+
+```php
+$isValidOrErrors = \Sinevia\Form::validate($fields);
+```
+
+## Fields ##
+
+The field is an associative array consisting of the following key-value pairs:
+
+- type - one of text, textarea, select, hidden, html
+- name - name of the input field as seen in the request
+- label - publicly visible name
+- width - width of the field - min 1, max 12
+- rule - rules for the field, used when validating
+- value - value of the field
+- options - array of options (used by the select type)
+- html - raw HTML to be displayed as-is (used by the html type)
+
+Example:
+
+```php
+[
+    'type' => 'text',
+    'name' => 'FirstName',
+    'label' => 'First name',
+    'width' => 6,
+    'rule' => 'required',
+    'value' => $value,
+]
+```
+
+## Full Example
 
 ```php
 function formProfileFields($user) {
