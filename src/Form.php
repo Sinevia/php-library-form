@@ -57,7 +57,7 @@ class Form {
                 //->setValue($value);
                 foreach ($options as $optionKey => $optionValue) {
                     $selected = $optionKey == $value ? true : false;
-                    $input->item($optionKey, $optionValue, $selected);
+                    $input->addItem($optionKey, $optionValue, $selected);
                 }
             }
 
