@@ -13,13 +13,19 @@
             "role": "Lead Developer"
         }
     ],
-    "require": {
-        "sinevia/php-library-html": "*",
-        "rakit/validation": "*"
-    },
     "autoload": {
         "files": [
             "src/Form.php"
         ]
+    },
+    "require": {
+        "sinevia/php-library-html": "*",
+        "rakit/validation": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
